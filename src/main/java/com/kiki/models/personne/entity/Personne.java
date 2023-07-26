@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class Personne {
 
     public Personne(SignUpRequest request, Role role, Boolean pending) {
         this.username = request.getUsername();
-        this.mdp = request.getMdp();
+        this.mdp = BCrypt.hashpw(request.getMdp(), BCrypt.gensalt());
         this.email = request.getEmail();
         this.pending = pending;
         this.role = role;

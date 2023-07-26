@@ -1,7 +1,9 @@
 package com.kiki.models.article.entity;
 
+import com.kiki.models.article.request.ArticleRequest;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import com.kiki.models.categorie.entity.Categorie;
 import com.kiki.models.conditionnement.entity.Conditionnement;
@@ -9,6 +11,7 @@ import com.kiki.models.uniteVente.entity.UniteVente;
 
 import java.util.Date;
 
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -31,7 +34,7 @@ public class Article {
     private Double puHT;
 
     @Column
-    private Integer d_g;
+    private Integer dg;
 
     @Column
     private Integer mD;
@@ -50,4 +53,18 @@ public class Article {
 
     @ManyToOne
     private UniteVente uniteVente;
+
+    public Article(ArticleRequest request, Categorie categorie, Conditionnement conditionnement, UniteVente uniteVente) {
+        this.refArt = request.getRefArt();
+        this.desArt = request.getDesArt();
+        this.imgArt = request.getImgArt();
+        this.puHT = request.getPuHT();
+        this.dg = request.getDg();
+        this.mD = request.getMD();
+        this.mG = request.getMG();
+        this.dateArt = new Date();
+        this.categorie = categorie;
+        this.conditionnement = conditionnement;
+        this.uniteVente = uniteVente;
+    }
 }

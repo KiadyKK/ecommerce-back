@@ -9,4 +9,9 @@ public class PersonneRepoImpl implements PersonneRepo {
     public Personne findByEmail(String email) {
         return find("email = ?1", email).firstResult();
     }
+
+    @Override
+    public Personne findByUsername(String username) {
+        return find("username = ?1", username).firstResult();
+    }
 }

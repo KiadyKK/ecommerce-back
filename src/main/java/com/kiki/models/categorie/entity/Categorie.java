@@ -2,11 +2,13 @@ package com.kiki.models.categorie.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import com.kiki.models.article.entity.Article;
 
 import java.util.List;
 
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -21,4 +23,8 @@ public class Categorie {
 
     @OneToMany(mappedBy = "categorie")
     private List<Article> articles;
+
+    public Categorie(String catArt) {
+        this.catArt = catArt;
+    }
 }

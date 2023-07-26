@@ -1,13 +1,16 @@
 package com.kiki.models.agence.entity;
 
+import com.kiki.models.agence.request.AgenceRequest;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import com.kiki.models.appro.entity.Appro;
 import com.kiki.models.livraison.entity.Livraison;
 
 import java.util.List;
 
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -31,4 +34,11 @@ public class Agence {
 
     @OneToMany(mappedBy = "agence")
     private List<Livraison> livraisons;
+
+    public Agence(AgenceRequest request) {
+        this.abrAgc = request.getAbrAgc();
+        this.agc = request.getAgc();
+        this.telAgc = request.getTelAgc();
+        this.addAgc = request.getAddAgc();
+    }
 }

@@ -2,11 +2,13 @@ package com.kiki.models.uniteVente.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import com.kiki.models.article.entity.Article;
 
 import java.util.List;
 
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -21,4 +23,8 @@ public class UniteVente {
 
     @OneToMany(mappedBy = "uniteVente")
     private List<Article> articles;
+
+    public UniteVente(String utvArt) {
+        this.utvArt = utvArt;
+    }
 }

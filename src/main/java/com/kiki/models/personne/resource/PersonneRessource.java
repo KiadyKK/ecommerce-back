@@ -1,5 +1,6 @@
 package com.kiki.models.personne.resource;
 
+import com.kiki.models.personne.request.SignInRequest;
 import com.kiki.models.personne.request.SignUpRequest;
 import com.kiki.models.personne.service.PersonneService;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -22,8 +23,16 @@ public class PersonneRessource {
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
-    @Path("signIn")
+    @Path("signup")
     public Response signUp(SignUpRequest request) {
         return personneService.signUp(request);
+    }
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("signin")
+    public Response signIn(SignInRequest request) {
+        return personneService.signIn(request);
     }
 }
