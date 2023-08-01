@@ -13,7 +13,6 @@ import java.util.List;
 @Table(name = "fournisseur")
 public class Fournisseur {
     @Id
-    @GeneratedValue
     private Long id;
 
     @Column

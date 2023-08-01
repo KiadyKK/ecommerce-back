@@ -15,7 +15,6 @@ import java.util.Date;
 @Table(name = "appro")
 public class Appro {
     @Id
-    @GeneratedValue
     private String facApp;
 
     @Column

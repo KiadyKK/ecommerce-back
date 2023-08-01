@@ -15,7 +15,6 @@ import java.util.Date;
 @Table(name = "livraison")
 public class Livraison {
     @Id
-    @GeneratedValue
     private String facLiv;
 
     @Column

@@ -15,6 +15,5 @@ import java.util.Date;
 @Table(name = "date")
 public class Day {
     @Id
-    @GeneratedValue
     private Date day;
 }

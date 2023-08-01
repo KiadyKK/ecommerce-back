@@ -18,7 +18,6 @@ import java.util.Date;
 @Table(name = "article")
 public class Article {
     @Id
-    @GeneratedValue
     private String refArt;
 
     @Column
@@ -60,8 +59,8 @@ public class Article {
         this.imgArt = request.getImgArt();
         this.puHT = request.getPuHT();
         this.dg = request.getDg();
-        this.mD = request.getMD();
-        this.mG = request.getMG();
+        this.mD = request.getMd();
+        this.mG = request.getDg();
         this.dateArt = new Date();
         this.categorie = categorie;
         this.conditionnement = conditionnement;

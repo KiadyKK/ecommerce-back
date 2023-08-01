@@ -22,9 +22,9 @@ public class ArticleRequest {
 
     private Integer dg;
 
-    private Integer mD;
+    private Integer md;
 
-    private Integer mG;
+    private Integer mg;
 
     private Date dateArt;
 

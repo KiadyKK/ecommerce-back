@@ -17,7 +17,6 @@ import java.util.List;
 @Table(name = "agence")
 public class Agence {
     @Id
-    @GeneratedValue
     private String abrAgc;
 
     @Column
