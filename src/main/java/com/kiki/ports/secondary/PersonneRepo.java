@@ -12,4 +12,8 @@ public interface PersonneRepo extends PanacheRepository<Personne> {
     Personne findByUsername(String username);
 
     List<Personne> listByUsernameAndRole(String username, String role);
+
+    int updatePending(long id);
+
+    boolean deletePersonne(long id);
 }

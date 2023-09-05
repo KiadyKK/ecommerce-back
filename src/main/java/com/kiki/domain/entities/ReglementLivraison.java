@@ -14,11 +14,13 @@ public class ReglementLivraison {
     private ReglementLivraisonId reglementLivraisonId = new ReglementLivraisonId();
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @MapsId("livraison_facLiv")
+    @MapsId("idFacLiv")
+    @JoinColumn(name = "idFacLiv")
     private Livraison livraison;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @MapsId("day_day")
+    @MapsId("idDay")
+    @JoinColumn(name = "idDay")
     private Day day;
 
     @Column

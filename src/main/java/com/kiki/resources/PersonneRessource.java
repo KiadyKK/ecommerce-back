@@ -7,6 +7,7 @@ import com.kiki.domain.requests.personne.SignInRequest;
 import com.kiki.domain.requests.personne.SignUpRequest;
 import com.kiki.domain.services.PersonneServiceImpl;
 import jakarta.annotation.security.PermitAll;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -43,5 +44,25 @@ public class PersonneRessource {
     @PermitAll
     public Response getAll(@QueryParam("username") String username, @QueryParam("role") String role) {
         return personneAdaptor.getAll(username, role);
+    }
+
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"Administrateur"})
+    @Transactional
+    @Path("{id}")
+    public Response updatePending(@PathParam("id") long id) {
+        return personneAdaptor.updatePending(id);
+    }
+
+    @DELETE
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"Administrateur"})
+    @Transactional
+    @Path("{id}")
+    public Response deletePersonne(@PathParam("id") long id) {
+        return personneAdaptor.deletePersonne(id);
     }
 }

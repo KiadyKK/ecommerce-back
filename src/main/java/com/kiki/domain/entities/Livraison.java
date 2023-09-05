@@ -30,11 +30,14 @@ public class Livraison {
     private Date dateEch;
 
     @ManyToOne
+    @JoinColumn(name = "idAbrAgc")
     private Agence agence;
 
     @ManyToOne
+    @JoinColumn(name = "idClt")
     private Client client;
 
     @ManyToOne
+    @JoinColumn(name = "idPers")
     private Personne personne;
 }

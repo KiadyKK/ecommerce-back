@@ -18,10 +18,10 @@ import java.util.Objects;
 @AllArgsConstructor
 public class ReglementLivraisonId implements Serializable {
     @Column
-    private String livraison_facLiv;
+    private String idFacLiv;
 
     @Column
-    private Date day_day;
+    private Date idDay;
 
     @Override
     public boolean equals(Object o) {
@@ -32,12 +32,12 @@ public class ReglementLivraisonId implements Serializable {
             return false;
         }
         ReglementLivraisonId pk = (ReglementLivraisonId) o;
-        return Objects.equals(livraison_facLiv, pk.livraison_facLiv) &&
-                Objects.equals(day_day, pk.day_day);
+        return Objects.equals(idFacLiv, pk.idFacLiv) &&
+                Objects.equals(idDay, pk.idDay);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(livraison_facLiv, day_day);
+        return Objects.hash(idFacLiv, idDay);
     }
 }

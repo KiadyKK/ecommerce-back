@@ -13,20 +13,11 @@ public class Retour {
 
     public Retour(String entity, Response.Status status) {
         switch (status) {
-            case CONFLICT:
-                this.message = " already exists.";
-                break;
-
-            case CREATED:
-                this.message = " created successfully !";
-                break;
-
-            case INTERNAL_SERVER_ERROR:
-                this.message = " internal server error.";
-                break;
-
-            default:
-            break;
+            case CONFLICT -> this.message = " already exists.";
+            case CREATED -> this.message = " created successfully !";
+            case INTERNAL_SERVER_ERROR -> this.message = " internal server error.";
+            default -> {
+            }
         }
         this.message = entity + this.message;
         this.status = status;

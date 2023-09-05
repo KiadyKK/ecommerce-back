@@ -16,10 +16,10 @@ import java.util.Objects;
 @NoArgsConstructor
 public class CaisseAgenceId implements Serializable {
     @Column
-    private String agence_abrAgc;
+    private String idAbrAgc;
 
     @Column
-    private Date day_day;
+    private Date idDay;
 
     @Override
     public boolean equals(Object o) {
@@ -30,12 +30,12 @@ public class CaisseAgenceId implements Serializable {
             return false;
         }
         CaisseAgenceId pk = (CaisseAgenceId) o;
-        return Objects.equals(agence_abrAgc, pk.agence_abrAgc) &&
-                Objects.equals(day_day, pk.day_day);
+        return Objects.equals(idAbrAgc, pk.idAbrAgc) &&
+                Objects.equals(idDay, pk.idDay);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(agence_abrAgc, day_day);
+        return Objects.hash(idAbrAgc, idDay);
     }
 }

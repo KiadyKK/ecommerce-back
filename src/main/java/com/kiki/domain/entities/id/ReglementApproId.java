@@ -16,10 +16,10 @@ import java.util.Objects;
 @NoArgsConstructor
 public class ReglementApproId implements Serializable {
     @Column
-    private String appro_facApp;
+    private String idFacApp;
 
     @Column
-    private Date day_day;
+    private Date idDay;
 
     @Override
     public boolean equals(Object o) {
@@ -30,12 +30,12 @@ public class ReglementApproId implements Serializable {
             return false;
         }
         ReglementApproId pk = (ReglementApproId) o;
-        return Objects.equals(appro_facApp, pk.appro_facApp) &&
-                Objects.equals(day_day, pk.day_day);
+        return Objects.equals(idFacApp, pk.idFacApp) &&
+                Objects.equals(idDay, pk.idDay);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(appro_facApp, day_day);
+        return Objects.hash(idFacApp, idDay);
     }
 }

@@ -14,11 +14,13 @@ public class ApproArticle {
     private ApproArticleId approArticleId = new ApproArticleId();
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @MapsId("appro_facApp")
+    @MapsId("idFacApp")
+    @JoinColumn(name = "idFacApp")
     private Appro appro;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @MapsId("article_refArt")
+    @MapsId("idRefArt")
+    @JoinColumn(name = "idRefArt")
     private Article article;
 
     @Column

@@ -27,6 +27,17 @@ public class PersonneRepoImpl implements PersonneRepo {
 
     @Override
     public List<Personne> listByUsernameAndRole(String username, String role) {
-        return list("SELECT p FROM Personne p WHERE p.username LIKE '%" + username + "%' AND p.role.role LIKE '%" + role + "%'");
+        return list("SELECT p FROM Personne p WHERE p.username LIKE '%" + username + "%' " +
+                "AND p.role.role LIKE '%" + role + "%'");
+    }
+
+    @Override
+    public int updatePending(long id) {
+       return update("pending = false WHERE id = ?1", id);
+    }
+
+    @Override
+    public boolean deletePersonne(long id) {
+        return deleteById(id);
     }
 }

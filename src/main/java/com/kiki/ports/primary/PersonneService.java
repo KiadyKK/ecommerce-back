@@ -13,4 +13,8 @@ public interface PersonneService {
     Response signIn(SignInRequest request);
 
     List<PersonneDto1> getAll(String username, String role);
+
+    int updatePending(long id);
+
+    int deletePersonne(long id);
 }

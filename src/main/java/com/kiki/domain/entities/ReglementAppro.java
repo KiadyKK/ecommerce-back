@@ -14,11 +14,13 @@ public class ReglementAppro {
     private ReglementApproId reglementApproId = new ReglementApproId();
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @MapsId("appro_facApp")
+    @MapsId("idFacApp")
+    @JoinColumn(name = "idFacApp")
     private Appro appro;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @MapsId("day_day")
+    @MapsId("idDay")
+    @JoinColumn(name = "idDay")
     private Day day;
 
     @Column

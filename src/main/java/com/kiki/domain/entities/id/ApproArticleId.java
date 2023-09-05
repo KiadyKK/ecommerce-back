@@ -15,10 +15,10 @@ import java.util.Objects;
 @NoArgsConstructor
 public class ApproArticleId implements Serializable {
     @Column
-    private String appro_facApp;
+    private String idFacApp;
 
     @Column
-    private String article_refArt;
+    private String idRefArt;
 
     @Override
     public boolean equals(Object o) {
@@ -29,12 +29,12 @@ public class ApproArticleId implements Serializable {
             return false;
         }
         ApproArticleId pk = (ApproArticleId) o;
-        return Objects.equals(appro_facApp, pk.appro_facApp) &&
-                Objects.equals(article_refArt, pk.article_refArt);
+        return Objects.equals(idFacApp, pk.idFacApp) &&
+                Objects.equals(idRefArt, pk.idRefArt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(appro_facApp, article_refArt);
+        return Objects.hash(idFacApp, idRefArt);
     }
 }

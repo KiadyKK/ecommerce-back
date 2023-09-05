@@ -114,6 +114,23 @@ public class PersonneServiceImpl implements PersonneService {
     public List<PersonneDto1> getAll(String username, String searchRole) {
         List<Personne> personnes = personneRepo.listByUsernameAndRole(username, searchRole);
 
+        LOGGER.info("Get All personne, size ==> " + personnes.size());
         return personnes.stream().map(personneMapper::entityToDto1).toList();
+    }
+
+    @Override
+    public int updatePending(long id) {
+        personneRepo.updatePending(id);
+
+        LOGGER.info("Update pending successfully !");
+        return (int) id;
+    }
+
+    @Override
+    public int deletePersonne(long id) {
+        personneRepo.deletePersonne(id);
+
+        LOGGER.info("Delete person successfully !");
+        return (int) id;
     }
 }

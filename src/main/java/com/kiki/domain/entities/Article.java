@@ -42,13 +42,15 @@ public class Article {
     private Date dateArt;
 
     @ManyToOne
-    @JoinColumn(name = "categorie_id")
+    @JoinColumn(name = "idCat")
     private Categorie categorie;
 
     @ManyToOne
+    @JoinColumn(name = "idCond")
     private Conditionnement conditionnement;
 
     @ManyToOne
+    @JoinColumn(name = "idUtv")
     private UniteVente uniteVente;
 
     public Article(ArticleRequest request, Categorie categorie, Conditionnement conditionnement, UniteVente uniteVente) {

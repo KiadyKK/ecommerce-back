@@ -14,11 +14,13 @@ public class CaisseAgence {
     private CaisseAgenceId caisseAgenceId = new CaisseAgenceId();
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @MapsId("agence_abrAgc")
+    @MapsId("idAbrAgc")
+    @JoinColumn(name = "idAbrAgc")
     private Agence agence;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @MapsId("day_day")
+    @MapsId("idDay")
+    @JoinColumn(name = "idDay")
     private Day day;
 
     @Column

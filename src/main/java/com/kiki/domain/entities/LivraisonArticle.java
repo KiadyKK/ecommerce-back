@@ -14,11 +14,13 @@ public class LivraisonArticle {
     private LivraisonArticleId livraisonArticleId = new LivraisonArticleId();
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @MapsId("livraison_facLiv")
+    @MapsId("idFacLiv")
+    @JoinColumn(name = "idFacLiv")
     private Livraison livraison;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @MapsId("article_refArt")
+    @MapsId("idRefArt")
+    @JoinColumn(name = "idRefArt")
     private Article article;
 
     @Column

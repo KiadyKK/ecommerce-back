@@ -16,13 +16,13 @@ import java.util.Objects;
 @NoArgsConstructor
 public class AgenceArticleId implements Serializable {
     @Column
-    private String agence_abrAgc;
+    private String idAbrAgc;
 
     @Column
-    private String article_refArt;
+    private String idRefArt;
 
     @Column
-    private Date day_day;
+    private Date idDay;
 
     @Override
     public boolean equals(Object o) {
@@ -33,13 +33,13 @@ public class AgenceArticleId implements Serializable {
             return false;
         }
         AgenceArticleId pk = (AgenceArticleId) o;
-        return Objects.equals(agence_abrAgc, pk.agence_abrAgc) &&
-                Objects.equals(article_refArt, pk.article_refArt) &&
-                Objects.equals(day_day, pk.day_day);
+        return Objects.equals(idAbrAgc, pk.idAbrAgc) &&
+                Objects.equals(idRefArt, pk.idRefArt) &&
+                Objects.equals(idDay, pk.idDay);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(agence_abrAgc, article_refArt, day_day);
+        return Objects.hash(idAbrAgc, idRefArt, idDay);
     }
 }

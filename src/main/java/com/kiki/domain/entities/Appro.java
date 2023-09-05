@@ -30,11 +30,14 @@ public class Appro {
     private Date dateEch;
 
     @ManyToOne
+    @JoinColumn(name = "idAbrAgc")
     private Agence agence;
 
     @ManyToOne
+    @JoinColumn(name = "idFour")
     private Fournisseur fournisseur;
 
     @ManyToOne
+    @JoinColumn(name = "idPers")
     private Personne personne;
 }
