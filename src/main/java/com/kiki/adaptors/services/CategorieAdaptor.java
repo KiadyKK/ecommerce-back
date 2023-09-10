@@ -17,23 +17,32 @@ import java.util.List;
 public class CategorieAdaptor {
     private final Logger LOGGER = Logger.getLogger(CategorieAdaptor.class);
 
-    private final String CATEGORIE = "CATEGORIE";
+    private final String CATEGORY = "Category";
 
     @Inject
     CategorieService categorieService;
 
     public Response create(CategorieRequest request) {
         try {
-            Response.Status status = categorieService.create(request);
-            return new Retour(CATEGORIE, status).getResponse();
+            return categorieService.create(request);
         } catch (Exception e) {
             LOGGER.error(e);
             return Response.serverError().entity(e).build();
         }
     }
 
-    public Response getAll() {
-        List<CategorieDto> categorieDtos = categorieService.getAll();
+    public Response getAll(String catArt) {
+        List<CategorieDto> categorieDtos = categorieService.getAll(catArt);
         return Response.ok(categorieDtos).build();
+    }
+
+    public Response deleteById(long id) {
+        try {
+            int result = categorieService.removeById(id);
+            return Response.ok(result).build();
+        } catch (Exception e) {
+            LOGGER.error(e);
+            return Response.serverError().entity(e).build();
+        }
     }
 }

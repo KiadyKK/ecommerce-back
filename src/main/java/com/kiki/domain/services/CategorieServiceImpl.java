@@ -10,6 +10,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.core.Response;
 import lombok.AllArgsConstructor;
+import org.jboss.logging.Logger;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
@@ -20,26 +21,28 @@ public class CategorieServiceImpl implements CategorieService {
     private final CategorieMapper categorieMapper = Mappers.getMapper(CategorieMapper.class);
 
     @Inject
+    Logger LOGGER;
+
+    @Inject
     CategorieRepo categorieRepo;
 
     /**
      * Create categorie
      *
      * @param request CategorieRequest
-     * @return status code eg: 201
      */
     @Override
-    public Response.Status create(CategorieRequest request) {
+    public Response create(CategorieRequest request) {
         //check if field catArt already exist
         Optional<Categorie> optional = Optional.ofNullable(categorieRepo.findByCatArt(request.getCatArt()));
         if (optional.isPresent())
-            return Response.Status.CONFLICT;
+            return Response.status(Response.Status.CONFLICT).entity("Category already exists.").build();
 
         //Create if not exists
         Categorie categorie = new Categorie(request.getCatArt());
         categorieRepo.persist(categorie);
 
-        return Response.Status.CREATED;
+        return Response.status(Response.Status.CREATED).entity(categorie).build();
     }
 
     /**
@@ -48,8 +51,16 @@ public class CategorieServiceImpl implements CategorieService {
      * @return List CategorieDto
      */
     @Override
-    public List<CategorieDto> getAll() {
-        List<Categorie> categories = categorieRepo.listAll();
+    public List<CategorieDto> getAll(String catArt) {
+        List<Categorie> categories = categorieRepo.listByCatArt(catArt);
+        LOGGER.info("Categories size ==> " + categories.size());
         return categories.stream().map(categorieMapper::entityToDto).toList();
+    }
+
+    @Override
+    public int removeById(long id) {
+        boolean result = categorieRepo.deleteById(id);
+        if (result) LOGGER.info("Category deleted successfully !");
+        return (int) id;
     }
 }

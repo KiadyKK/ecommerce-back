@@ -1,10 +1,7 @@
 package com.kiki.resources;
 
-import com.kiki.adaptors.repo.CategorieRepoImpl;
 import com.kiki.adaptors.services.CategorieAdaptor;
 import com.kiki.domain.requests.categorie.CategorieRequest;
-import com.kiki.domain.services.CategorieServiceImpl;
-import com.kiki.ports.primary.CategorieService;
 import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -21,11 +18,10 @@ public class CategorieResource {
     CategorieAdaptor categorieAdaptor;
 
     @POST
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
     @RolesAllowed({"Administrateur", "Commercial"})
-    @Path("create")
     public Response create(CategorieRequest request) {
         return categorieAdaptor.create(request);
     }
@@ -33,7 +29,17 @@ public class CategorieResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @PermitAll
-    public Response getAll() {
-        return categorieAdaptor.getAll();
+    public Response getAll(@QueryParam("catArt") String catArt) {
+        return categorieAdaptor.getAll(catArt);
+    }
+
+    @DELETE
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    @RolesAllowed({"Administrateur", "Commercial"})
+    @Path("{id}")
+    public Response removeById(@PathParam("id") long id) {
+        return categorieAdaptor.deleteById(id);
     }
 }
