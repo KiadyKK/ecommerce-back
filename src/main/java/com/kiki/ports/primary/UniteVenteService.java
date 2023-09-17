@@ -7,7 +7,11 @@ import jakarta.ws.rs.core.Response;
 import java.util.List;
 
 public interface UniteVenteService {
-    Response.Status create(UniteVenteRequest request);
+    Response create(UniteVenteRequest request);
 
-    List<UniteVenteDto> getAll();
+    List<UniteVenteDto> getAll(String utvArt);
+
+    int removeById(long id);
+
+    UniteVenteDto update(UniteVenteDto uniteVenteDto);
 }

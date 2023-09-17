@@ -1,6 +1,7 @@
 package com.kiki.resources;
 
 import com.kiki.adaptors.services.CategorieAdaptor;
+import com.kiki.domain.dto.categorie.CategorieDto;
 import com.kiki.domain.requests.categorie.CategorieRequest;
 import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
@@ -41,5 +42,14 @@ public class CategorieResource {
     @Path("{id}")
     public Response removeById(@PathParam("id") long id) {
         return categorieAdaptor.deleteById(id);
+    }
+
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    @RolesAllowed({"Administrateur", "Commercial"})
+    public Response update(CategorieDto categorieDto) {
+        return categorieAdaptor.update(categorieDto);
     }
 }

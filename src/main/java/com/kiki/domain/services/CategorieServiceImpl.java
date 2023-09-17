@@ -9,7 +9,6 @@ import com.kiki.ports.secondary.CategorieRepo;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.core.Response;
-import lombok.AllArgsConstructor;
 import org.jboss.logging.Logger;
 import org.mapstruct.factory.Mappers;
 
@@ -59,8 +58,15 @@ public class CategorieServiceImpl implements CategorieService {
 
     @Override
     public int removeById(long id) {
-        boolean result = categorieRepo.deleteById(id);
-        if (result) LOGGER.info("Category deleted successfully !");
+        boolean result = categorieRepo.removeById(id);
+        if (result) LOGGER.info("Category with id " + id + " deleted successfully !");
         return (int) id;
+    }
+
+    @Override
+    public CategorieDto update(CategorieDto categorieDto) {
+        categorieRepo.update(categorieDto);
+        LOGGER.info("Category with id " + categorieDto.getId() + " updated successfully !");
+        return categorieDto;
     }
 }

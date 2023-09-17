@@ -1,5 +1,6 @@
 package com.kiki.ports.secondary;
 
+import com.kiki.domain.dto.categorie.CategorieDto;
 import com.kiki.domain.entities.Categorie;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 
@@ -11,4 +12,6 @@ public interface CategorieRepo extends PanacheRepository<Categorie> {
     List<Categorie> listByCatArt(String catArt);
 
     boolean removeById(long id);
+
+    int update(CategorieDto categorieDto);
 }

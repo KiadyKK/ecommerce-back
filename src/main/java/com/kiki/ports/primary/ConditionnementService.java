@@ -7,7 +7,11 @@ import jakarta.ws.rs.core.Response;
 import java.util.List;
 
 public interface ConditionnementService {
-    Response.Status create(ConditionnementRequest request);
+    Response create(ConditionnementRequest request);
 
-    List<ConditionnementDto> getAll();
+    List<ConditionnementDto> getAll(String condArt);
+
+    int removeById(long id);
+
+    ConditionnementDto update(ConditionnementDto conditionnementDto);
 }

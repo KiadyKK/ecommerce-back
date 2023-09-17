@@ -1,5 +1,6 @@
 package com.kiki.adaptors.repo;
 
+import com.kiki.domain.dto.categorie.CategorieDto;
 import com.kiki.domain.entities.Categorie;
 import com.kiki.ports.secondary.CategorieRepo;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -21,5 +22,10 @@ public class CategorieRepoImpl implements CategorieRepo {
     @Override
     public boolean removeById(long id) {
         return deleteById(id);
+    }
+
+    @Override
+    public int update(CategorieDto categorieDto) {
+        return update("SET catArt = ?1 WHERE id = ?2", categorieDto.getCatArt(), categorieDto.getId());
     }
 }

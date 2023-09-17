@@ -9,7 +9,7 @@ import com.kiki.ports.secondary.ConditionnementRepo;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.core.Response;
-import lombok.AllArgsConstructor;
+import org.jboss.logging.Logger;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
@@ -22,6 +22,9 @@ public class ConditionnementServiceImpl implements ConditionnementService {
     @Inject
     ConditionnementRepo conditionnementRepo;
 
+    @Inject
+    Logger LOGGER;
+
     /**
      * Create Conditionnement
      *
@@ -29,17 +32,17 @@ public class ConditionnementServiceImpl implements ConditionnementService {
      * @return Status code eg: 201
      */
     @Override
-    public Response.Status create(ConditionnementRequest request) {
+    public Response create(ConditionnementRequest request) {
         //Check if field condArt already exists
         Optional<Conditionnement> optional = Optional.ofNullable(conditionnementRepo.findByCondArt(request.getCondArt()));
         if (optional.isPresent())
-            return Response.Status.CONFLICT;
+            return Response.status(Response.Status.CONFLICT).entity("Conditionnement already exists.").build();
 
         //Create if not exists
         Conditionnement conditionnement = new Conditionnement(request.getCondArt());
         conditionnementRepo.persist(conditionnement);
 
-        return Response.Status.CREATED;
+        return Response.status(Response.Status.CREATED).entity(conditionnement).build();
     }
 
     /**
@@ -48,8 +51,23 @@ public class ConditionnementServiceImpl implements ConditionnementService {
      * @return List ConditionnementDto
      */
     @Override
-    public List<ConditionnementDto> getAll() {
-        List<Conditionnement> conditionnements = conditionnementRepo.listAll();
+    public List<ConditionnementDto> getAll(String condArt) {
+        List<Conditionnement> conditionnements = conditionnementRepo.listByCondArt(condArt);
+        LOGGER.info("Conditionnements size ==> " + conditionnements.size());
         return conditionnements.stream().map(conditionnementMapper::entityToDto).toList();
+    }
+
+    @Override
+    public int removeById(long id) {
+        boolean result = conditionnementRepo.removeById(id);
+        if (result) LOGGER.info("Conditionnement with id " + id + " deleted successfully !");
+        return (int) id;
+    }
+
+    @Override
+    public ConditionnementDto update(ConditionnementDto conditionnementDto) {
+        conditionnementRepo.update(conditionnementDto);
+        LOGGER.info("Conditionnement with id " + conditionnementDto.getId() + " updated successfully !");
+        return conditionnementDto;
     }
 }
