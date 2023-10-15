@@ -7,6 +7,7 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
@@ -15,5 +16,5 @@ import java.util.Date;
 @Table(name = "date")
 public class Day {
     @Id
-    private Date day;
+    private LocalDateTime day;
 }

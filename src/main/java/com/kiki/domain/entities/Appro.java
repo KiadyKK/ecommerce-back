@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
@@ -24,10 +25,10 @@ public class Appro {
     private Double totalApp;
 
     @Column
-    private Date dateCom;
+    private LocalDateTime dateCom;
 
     @Column
-    private Date dateEch;
+    private LocalDateTime dateEch;
 
     @ManyToOne
     @JoinColumn(name = "idAbrAgc")

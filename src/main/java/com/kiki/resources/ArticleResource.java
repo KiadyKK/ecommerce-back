@@ -1,8 +1,6 @@
 package com.kiki.resources;
 
 import com.kiki.adaptors.services.ArticleAdaptor;
-import com.kiki.common.InterfaceImplementationUtil;
-import com.kiki.domain.services.ArticleServiceImpl;
 import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -14,6 +12,8 @@ import jakarta.ws.rs.core.Response;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
+import java.io.File;
+
 @Path("/article")
 @ApplicationScoped
 public class ArticleResource {
@@ -21,19 +21,29 @@ public class ArticleResource {
     ArticleAdaptor articleAdaptor;
 
     @POST
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Transactional
     @RolesAllowed({"Administrateur", "Commercial"})
-    @Path("create")
     public Response create(@MultipartForm MultipartFormDataInput input) {
         return articleAdaptor.create(input);
     }
 
     @GET
+    @Path("/download/{img}")
+    @Produces(MediaType.APPLICATION_OCTET_STREAM)
+    public Response downloadFile(@PathParam("img") String img) {
+        File file = articleAdaptor.download(img);
+        Response.ResponseBuilder response = Response.ok(file);
+        response.header("Content-Disposition", "attachment;filename=" + file);
+        return response.build();
+    }
+
+    @GET
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @PermitAll
-    public Response getAll() {
-        return articleAdaptor.getAll();
+    public Response getAll(@QueryParam("catArt") String catArt, @QueryParam("condArt") String condArt, @QueryParam("utvArt") String utvArt) {
+        return articleAdaptor.getAll(catArt, condArt, utvArt);
     }
 }

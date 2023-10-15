@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
 
@@ -21,7 +22,7 @@ public class ReglementLivraisonId implements Serializable {
     private String idFacLiv;
 
     @Column
-    private Date idDay;
+    private LocalDateTime idDay;
 
     @Override
     public boolean equals(Object o) {

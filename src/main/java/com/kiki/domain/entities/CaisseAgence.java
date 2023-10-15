@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import com.kiki.domain.entities.id.CaisseAgenceId;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @Entity
@@ -24,7 +26,7 @@ public class CaisseAgence {
     private Day day;
 
     @Column
-    private String r_d;
+    private String recdep;
 
     @Column
     private String noFac;

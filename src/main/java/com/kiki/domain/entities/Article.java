@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @NoArgsConstructor
@@ -33,13 +34,13 @@ public class Article {
     private Integer dg;
 
     @Column
-    private Integer mD;
+    private Integer md;
 
     @Column
-    private Integer mG;
+    private Integer mg;
 
     @Column
-    private Date dateArt;
+    private LocalDateTime dateArt;
 
     @ManyToOne
     @JoinColumn(name = "idCat")
@@ -59,9 +60,9 @@ public class Article {
         this.imgArt = request.getImgArt();
         this.puHT = request.getPuHT();
         this.dg = request.getDg();
-        this.mD = request.getMd();
-        this.mG = request.getDg();
-        this.dateArt = new Date();
+        this.md = request.getMd();
+        this.mg = request.getDg();
+        this.dateArt = LocalDateTime.now();
         this.categorie = categorie;
         this.conditionnement = conditionnement;
         this.uniteVente = uniteVente;

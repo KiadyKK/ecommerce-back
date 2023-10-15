@@ -21,6 +21,7 @@ public class ConditionnementResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"Administrateur", "Commercial"})
     @Transactional
     public Response create(ConditionnementRequest request) {
         return conditionnementAdaptor.create(request);

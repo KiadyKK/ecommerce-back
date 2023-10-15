@@ -68,7 +68,7 @@ public class ArticleServiceImpl implements ArticleService {
         try {
             //Split file and data
             Map<String, List<InputPart>> uploadForm = input.getFormDataMap();
-            InputPart inputPart = uploadForm.get("file").get(0);
+            InputPart inputPart1 = uploadForm.get("file").get(0);
             InputPart inputPart2 = uploadForm.get("data").get(0);
             InputStream inputStream = inputPart2.getBody(InputStream.class, null);
             JSONParser parser = new JSONParser();
@@ -76,21 +76,21 @@ public class ArticleServiceImpl implements ArticleService {
 
             ObjectMapper objectMapper = new ObjectMapper();
             ArticleRequest request = objectMapper.readValue(obj.toString(), ArticleRequest.class);
-
+            System.out.println("====> " + request.getImgArt());
             //Check if field refArt already exists
             Optional<Article> optional = Optional.ofNullable(articleRepo.findByRefArt(request.getRefArt()));
             if (optional.isPresent())
                 return Response.Status.CONFLICT;
 
-            Categorie categorie = categorieRepo.findByCatArt(request.getCategorie());
-            Conditionnement conditionnement = conditionnementRepo.findByCondArt(request.getConditionnement());
-            UniteVente uniteVente = uniteVenteRepo.findByUtvArt(request.getUniteVente());
+            Categorie categorie = categorieRepo.findByCatArt(request.getCategorie().getCatArt());
+            Conditionnement conditionnement = conditionnementRepo.findByCondArt(request.getConditionnement().getCondArt());
+            UniteVente uniteVente = uniteVenteRepo.findByUtvArt(request.getUniteVente().getUtvArt());
 
             //Create if refArt not exists
             Article article = new Article(request, categorie, conditionnement, uniteVente);
             articleRepo.persist(article);
 
-//            uploadFile(request.getRefArt(), inputPart, request.getImgArt());
+            uploadFile(request.getRefArt(), inputPart1, request.getImgArt());
 
             return Response.Status.CREATED;
         } catch (Exception e) {
@@ -111,7 +111,7 @@ public class ArticleServiceImpl implements ArticleService {
     private void writeFile(String refArt, InputStream inputStream, String fileName) throws IOException {
         byte[] bytes = IOUtils.toByteArray(inputStream);
         File customDir = new File(UPLOAD_DIR);
-        fileName = customDir.getAbsolutePath() + File.separator + refArt + fileName;
+        fileName = customDir.getAbsolutePath() + File.separator + "articles" + File.separator + refArt + "_" + fileName;
         Files.write(Paths.get(fileName), bytes, StandardOpenOption.CREATE_NEW);
     }
 
@@ -119,8 +119,14 @@ public class ArticleServiceImpl implements ArticleService {
      * Get All Articles
      */
     @Override
-    public List<ArticleDto> getAll() {
-        List<Article> articles = articleRepo.listAll();
+    public List<ArticleDto> getAll(String catArt, String condArt, String utvArt) {
+        List<Article> articles = articleRepo.getAll(catArt, condArt, utvArt);
+        LOGGER.info("Articles size ==> " + articles.size());
         return articles.stream().map(articleMapper::entityToDto).toList();
+    }
+
+    @Override
+    public File download(String img) {
+        return new File(UPLOAD_DIR + File.separator + "articles" + File.separator + img);
     }
 }

@@ -1,5 +1,8 @@
 package com.kiki.domain.requests.article;
 
+import com.kiki.domain.entities.Categorie;
+import com.kiki.domain.entities.Conditionnement;
+import com.kiki.domain.entities.UniteVente;
 import lombok.Data;
 
 @Data
@@ -20,9 +23,9 @@ public class ArticleRequest {
 
     private Integer mg;
 
-    private String categorie;
+    private Categorie categorie;
 
-    private String conditionnement;
+    private Conditionnement conditionnement;
 
-    private String uniteVente;
+    private UniteVente uniteVente;
 }
