@@ -3,6 +3,7 @@ package com.kiki.domain.services;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kiki.common.InterfaceImplementation;
 import com.kiki.domain.dto.article.ArticleDto;
+import com.kiki.domain.dto.article.ArticleUpdate;
 import com.kiki.domain.entities.Article;
 import com.kiki.domain.entities.Categorie;
 import com.kiki.domain.entities.Conditionnement;
@@ -60,6 +61,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     /**
      * Create Article
+     *
      * @param input file and data
      * @return status code eg: 201
      */
@@ -119,8 +121,8 @@ public class ArticleServiceImpl implements ArticleService {
      * Get All Articles
      */
     @Override
-    public List<ArticleDto> getAll(String catArt, String condArt, String utvArt) {
-        List<Article> articles = articleRepo.getAll(catArt, condArt, utvArt);
+    public List<ArticleDto> getAll(String catArt, String condArt, String utvArt, String desArt) {
+        List<Article> articles = articleRepo.getAll(catArt, condArt, utvArt, desArt);
         LOGGER.info("Articles size ==> " + articles.size());
         return articles.stream().map(articleMapper::entityToDto).toList();
     }
@@ -128,5 +130,20 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public File download(String img) {
         return new File(UPLOAD_DIR + File.separator + "articles" + File.separator + img);
+    }
+
+    @Override
+    public String removeByRef(String refArt) {
+        long result = articleRepo.removeByRef(refArt);
+        if (result > 0) LOGGER.info("Article with refArt " + refArt + " deleted successfully !");
+        return refArt;
+    }
+
+    @Override
+    public ArticleDto update(ArticleUpdate articleUpdate) {
+        int result = articleRepo.updateByRef(articleUpdate);
+        if (result > 0) LOGGER.info("Article with refArt " + articleUpdate.getRefArt() + " updated successfully !");
+        Article article = articleRepo.findByRefArt(articleUpdate.getRefArt());
+        return articleMapper.entityToDto(article);
     }
 }

@@ -1,6 +1,7 @@
 package com.kiki.resources;
 
 import com.kiki.adaptors.services.ArticleAdaptor;
+import com.kiki.domain.dto.article.ArticleUpdate;
 import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -43,7 +44,26 @@ public class ArticleResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @PermitAll
-    public Response getAll(@QueryParam("catArt") String catArt, @QueryParam("condArt") String condArt, @QueryParam("utvArt") String utvArt) {
-        return articleAdaptor.getAll(catArt, condArt, utvArt);
+    public Response getAll(@QueryParam("catArt") String catArt, @QueryParam("condArt") String condArt, @QueryParam("utvArt") String utvArt, @QueryParam("desArt") String desArt) {
+        return articleAdaptor.getAll(catArt, condArt, utvArt, desArt);
+    }
+
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
+    @Transactional
+    @RolesAllowed({"Administrateur", "Commercial"})
+    @Path("{refArt}")
+    public Response removeByRef(@PathParam("refArt") String refArt) {
+        return articleAdaptor.deleteByRef(refArt);
+    }
+
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    @RolesAllowed({"Administrateur", "Commercial"})
+    public Response update(ArticleUpdate articleUpdate) {
+        return articleAdaptor.update(articleUpdate);
     }
 }
