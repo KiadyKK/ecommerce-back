@@ -1,11 +1,9 @@
 package com.kiki.resources;
 
-import com.kiki.adaptors.repo.AgenceRepoImpl;
 import com.kiki.adaptors.services.AgenceAdaptor;
 import com.kiki.domain.requests.agence.AgenceRequest;
-import com.kiki.domain.services.AgenceServiceImpl;
-import com.kiki.ports.primary.AgenceService;
 import jakarta.annotation.security.PermitAll;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -20,11 +18,10 @@ public class AgenceResource {
     AgenceAdaptor agenceAdaptor;
 
     @POST
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
-    @PermitAll
-    @Path("create")
+    @RolesAllowed({"Administrateur", "Commercial"})
     public Response create(AgenceRequest request) {
         return agenceAdaptor.create(request);
     }
@@ -32,7 +29,26 @@ public class AgenceResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @PermitAll
-    public Response getAll() {
-        return agenceAdaptor.getAll();
+    public Response getAll(@QueryParam("agc") String agc) {
+        return agenceAdaptor.getAll(agc);
+    }
+
+    @DELETE
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    @RolesAllowed({"Administrateur", "Commercial"})
+    @Path("{abrAgc}")
+    public Response removeByAbr(@PathParam("abrAgc") String abrAgc) {
+        return agenceAdaptor.removeByAbr(abrAgc);
+    }
+
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    @RolesAllowed({"Administrateur", "Commercial"})
+    public Response update(AgenceRequest request) {
+        return agenceAdaptor.update(request);
     }
 }

@@ -7,7 +7,11 @@ import jakarta.ws.rs.core.Response;
 import java.util.List;
 
 public interface AgenceService {
-    Response.Status create(AgenceRequest request);
+    Response create(AgenceRequest request);
 
-    List<AgenceDto> getAll();
+    List<AgenceDto> getAll(String agc);
+
+    String removeByAbr(String abrAgc);
+
+    AgenceDto update(AgenceRequest request);
 }

@@ -1,6 +1,6 @@
 package com.kiki.ports.secondary;
 
-import com.kiki.domain.dto.article.ArticleUpdate;
+import com.kiki.domain.requests.article.ArticleUpdateRequest;
 import com.kiki.domain.entities.Article;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 
@@ -13,5 +13,5 @@ public interface ArticleRepo extends PanacheRepository<Article> {
 
     long removeByRef(String refArt);
 
-    int updateByRef(ArticleUpdate articleUpdate);
+    int updateByRef(ArticleUpdateRequest articleUpdate);
 }

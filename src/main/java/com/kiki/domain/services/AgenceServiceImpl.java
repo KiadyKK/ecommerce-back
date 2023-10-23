@@ -22,6 +22,9 @@ public class AgenceServiceImpl implements AgenceService {
     private final AgenceMapper agenceMapper = Mappers.getMapper(AgenceMapper.class);
 
     @Inject
+    Logger LOGGER;
+
+    @Inject
     AgenceRepo agenceRepo;
 
     /**
@@ -29,17 +32,18 @@ public class AgenceServiceImpl implements AgenceService {
      * @return status code eg 201
      */
     @Override
-    public Response.Status create(@NotNull AgenceRequest request) {
+    public Response create(@NotNull AgenceRequest request) {
         //check if field abrAgc already exists
         Optional<Agence> optional = Optional.ofNullable(agenceRepo.findByAbrAgc(request.getAbrAgc()));
         if (optional.isPresent())
-            return Response.Status.CONFLICT;
+            return Response.status(Response.Status.CONFLICT).entity("Agency already exists.").build();
 
         //Create if not exists
         Agence agence = new Agence(request);
         agenceRepo.persist(agence);
 
-        return Response.Status.CREATED;
+        LOGGER.info("Agency " + request.getAgc() + " created successfully !");
+        return Response.status(Response.Status.CREATED).entity(agence).build();
     }
 
     /**
@@ -48,8 +52,23 @@ public class AgenceServiceImpl implements AgenceService {
      * @return List AgenceDto
      */
     @Override
-    public List<AgenceDto> getAll() {
-        List<Agence> agences = agenceRepo.listAll();
+    public List<AgenceDto> getAll(String agc) {
+        List<Agence> agences = agenceRepo.listByAgc(agc);
         return agences.stream().map(agenceMapper::entityToDto).toList();
+    }
+
+    @Override
+    public String removeByAbr(String abrAgc) {
+        long res = agenceRepo.removeByAbr(abrAgc);
+        if (res > 0) LOGGER.info("Agency with abrAgc " + abrAgc + " deleted successfully !");
+        return abrAgc;
+    }
+
+    @Override
+    public AgenceDto update(AgenceRequest request) {
+        int res = agenceRepo.updateByAbr(request);
+        if (res > 0) LOGGER.info("Agency with abrAgc " + request.getAbrAgc() + " updated successfully !");
+        Agence agence = agenceRepo.findByAbrAgc(request.getAbrAgc());
+        return agenceMapper.entityToDto(agence);
     }
 }

@@ -1,9 +1,8 @@
 package com.kiki.domain.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kiki.common.InterfaceImplementation;
 import com.kiki.domain.dto.article.ArticleDto;
-import com.kiki.domain.dto.article.ArticleUpdate;
+import com.kiki.domain.requests.article.ArticleUpdateRequest;
 import com.kiki.domain.entities.Article;
 import com.kiki.domain.entities.Categorie;
 import com.kiki.domain.entities.Conditionnement;
@@ -140,7 +139,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public ArticleDto update(ArticleUpdate articleUpdate) {
+    public ArticleDto update(ArticleUpdateRequest articleUpdate) {
         int result = articleRepo.updateByRef(articleUpdate);
         if (result > 0) LOGGER.info("Article with refArt " + articleUpdate.getRefArt() + " updated successfully !");
         Article article = articleRepo.findByRefArt(articleUpdate.getRefArt());

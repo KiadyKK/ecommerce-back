@@ -1,4 +1,4 @@
-package com.kiki.domain.dto.article;
+package com.kiki.domain.requests.article;
 
 import com.kiki.domain.entities.Conditionnement;
 import com.kiki.domain.entities.UniteVente;
@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ArticleUpdate {
+public class ArticleUpdateRequest {
     private String refArt;
 
     private String desArt;

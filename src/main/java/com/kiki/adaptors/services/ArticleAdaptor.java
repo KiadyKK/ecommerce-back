@@ -2,8 +2,7 @@ package com.kiki.adaptors.services;
 
 import com.kiki.common.Retour;
 import com.kiki.domain.dto.article.ArticleDto;
-import com.kiki.domain.dto.article.ArticleUpdate;
-import com.kiki.domain.services.ArticleServiceImpl;
+import com.kiki.domain.requests.article.ArticleUpdateRequest;
 import com.kiki.ports.primary.ArticleService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -48,14 +47,13 @@ public class ArticleAdaptor {
         }
     }
 
-    public Response update(ArticleUpdate articleUpdate) {
+    public Response update(ArticleUpdateRequest articleUpdate) {
         try {
             ArticleDto articleDto = articleService.update(articleUpdate);
             return Response.ok(articleDto).build();
         } catch (Exception e) {
-            throw new RuntimeException(e);
-//            LOGGER.error(e);
-//            return Response.serverError().entity(e).build();
+            LOGGER.error(e);
+            return Response.serverError().entity(e).build();
         }
     }
 }

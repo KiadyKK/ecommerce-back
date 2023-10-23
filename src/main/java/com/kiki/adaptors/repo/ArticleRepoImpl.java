@@ -1,6 +1,6 @@
 package com.kiki.adaptors.repo;
 
-import com.kiki.domain.dto.article.ArticleUpdate;
+import com.kiki.domain.requests.article.ArticleUpdateRequest;
 import com.kiki.domain.entities.Article;
 import com.kiki.ports.secondary.ArticleRepo;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -26,7 +26,7 @@ public class ArticleRepoImpl implements ArticleRepo {
     }
 
     @Override
-    public int updateByRef(ArticleUpdate articleUpdate) {
+    public int updateByRef(ArticleUpdateRequest articleUpdate) {
         return update("""
                 desArt = ?1,
                 puHT = ?2,

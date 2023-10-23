@@ -1,7 +1,7 @@
 package com.kiki.resources;
 
 import com.kiki.adaptors.services.ArticleAdaptor;
-import com.kiki.domain.dto.article.ArticleUpdate;
+import com.kiki.domain.requests.article.ArticleUpdateRequest;
 import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -63,7 +63,7 @@ public class ArticleResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     @RolesAllowed({"Administrateur", "Commercial"})
-    public Response update(ArticleUpdate articleUpdate) {
+    public Response update(ArticleUpdateRequest articleUpdate) {
         return articleAdaptor.update(articleUpdate);
     }
 }

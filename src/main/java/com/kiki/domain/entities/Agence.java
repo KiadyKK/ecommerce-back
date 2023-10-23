@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.mindrot.jbcrypt.BCrypt;
 
-import java.util.List;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -22,10 +22,13 @@ public class Agence {
     private String agc;
 
     @Column
-    private Long telAgc;
+    private String telAgc;
 
     @Column
     private String addAgc;
+
+    @Column
+    private String mdp;
 
     @OneToMany(mappedBy = "agence")
     private Set<Appro> appros;
@@ -41,5 +44,6 @@ public class Agence {
         this.agc = request.getAgc();
         this.telAgc = request.getTelAgc();
         this.addAgc = request.getAddAgc();
+        this.mdp = request.getMdp();
     }
 }

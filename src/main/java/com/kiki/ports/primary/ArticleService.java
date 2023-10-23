@@ -1,7 +1,7 @@
 package com.kiki.ports.primary;
 
 import com.kiki.domain.dto.article.ArticleDto;
-import com.kiki.domain.dto.article.ArticleUpdate;
+import com.kiki.domain.requests.article.ArticleUpdateRequest;
 import jakarta.ws.rs.core.Response;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
@@ -15,7 +15,7 @@ public interface ArticleService {
 
     File download(String img);
 
-    String removeByRef(String  refArt);
+    String removeByRef(String refArt);
 
-    ArticleDto update(ArticleUpdate articleUpdate);
+    ArticleDto update(ArticleUpdateRequest articleUpdate);
 }

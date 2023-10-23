@@ -10,7 +10,9 @@ public class AgenceDto {
 
     private String agc;
 
-    private Long telAgc;
+    private String telAgc;
 
     private String addAgc;
+
+    private String mdp;
 }
