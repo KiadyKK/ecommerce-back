@@ -14,4 +14,6 @@ public interface AgenceRepo extends PanacheRepository<Agence> {
     long removeByAbr(String abrAgc);
 
     int updateByAbr(AgenceRequest request);
+
+    Agence findByAbr(String abrAgc);
 }

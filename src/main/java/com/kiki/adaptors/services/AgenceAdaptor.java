@@ -53,4 +53,14 @@ public class AgenceAdaptor {
             return Response.serverError().entity(e).build();
         }
     }
+
+    public Response getByAbr(String abrAgc) {
+        try {
+            AgenceDto agenceDto = agenceService.getByAbr(abrAgc);
+            return Response.ok(agenceDto).build();
+        } catch (Exception e) {
+            LOGGER.error(e);
+            return Response.serverError().entity(e).build();
+        }
+    }
 }

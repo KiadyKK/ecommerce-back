@@ -14,4 +14,6 @@ public interface AgenceService {
     String removeByAbr(String abrAgc);
 
     AgenceDto update(AgenceRequest request);
+
+    AgenceDto getByAbr(String abrAgc);
 }

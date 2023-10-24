@@ -51,4 +51,13 @@ public class AgenceResource {
     public Response update(AgenceRequest request) {
         return agenceAdaptor.update(request);
     }
+
+    @GET
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @PermitAll
+    @Path("abr")
+    public Response getByAbr(@QueryParam("abrAgc") String abrAgc) {
+        return agenceAdaptor.getByAbr(abrAgc);
+    }
 }

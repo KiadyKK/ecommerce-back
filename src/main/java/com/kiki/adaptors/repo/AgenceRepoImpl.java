@@ -35,4 +35,9 @@ public class AgenceRepoImpl implements AgenceRepo {
                 """, request.getAgc(), request.getTelAgc(), request.getAddAgc(),
                 request.getMdp(), request.getAbrAgc());
     }
+
+    @Override
+    public Agence findByAbr(String abrAgc) {
+        return find("abrAgc = ?1", abrAgc).firstResult();
+    }
 }
