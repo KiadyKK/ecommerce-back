@@ -1,22 +1,22 @@
 package com.kiki.domain.entities;
 
+import com.kiki.domain.entities.id.CommandelivraisonArticleId;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import com.kiki.domain.entities.id.LivraisonArticleId;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "livraison_article")
-public class LivraisonArticle {
+@Table(name = "commandelivraison_article")
+public class CommandelivraisonArticle {
     @EmbeddedId
-    private LivraisonArticleId livraisonArticleId = new LivraisonArticleId();
+    private CommandelivraisonArticleId commandelivraisonArticleId = new CommandelivraisonArticleId();
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @MapsId("idFacLiv")
-    @JoinColumn(name = "idFacLiv")
-    private Livraison livraison;
+    @MapsId("idFacComLiv")
+    @JoinColumn(name = "idFacComLiv")
+    private CommandeLivraison commandeLivraison;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @MapsId("idRefArt")

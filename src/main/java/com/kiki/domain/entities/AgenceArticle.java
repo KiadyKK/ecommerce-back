@@ -36,4 +36,7 @@ public class AgenceArticle {
 
     @Column
     private Double puArt;
+
+    @Column
+    private Double puArtM;
 }

@@ -33,5 +33,6 @@ public class ReglementLivraison {
     private Double reste;
 
     @ManyToOne
+    @JoinColumn(name = "idClt")
     private Client client;
 }

@@ -33,5 +33,6 @@ public class ReglementAppro {
     private Double reste;
 
     @ManyToOne
+    @JoinColumn(name = "idAbrAgc")
     private Agence agence;
 }

@@ -43,15 +43,15 @@ public class Article {
     private LocalDateTime dateArt;
 
     @ManyToOne
-    @JoinColumn(name = "idCat")
+    @JoinColumn(name = "idCatArt")
     private Categorie categorie;
 
     @ManyToOne
-    @JoinColumn(name = "idCond")
+    @JoinColumn(name = "idCondArt")
     private Conditionnement conditionnement;
 
     @ManyToOne
-    @JoinColumn(name = "idUtv")
+    @JoinColumn(name = "idUtvArt")
     private UniteVente uniteVente;
 
     public Article(ArticleRequest request, Categorie categorie, Conditionnement conditionnement, UniteVente uniteVente) {

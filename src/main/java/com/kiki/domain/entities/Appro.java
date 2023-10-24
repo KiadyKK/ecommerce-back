@@ -19,26 +19,16 @@ public class Appro {
     private String noBa;
 
     @Column
-    private String mPay;
-
-    @Column
-    private Double totalApp;
-
-    @Column
-    private LocalDateTime dateCom;
+    private LocalDateTime dateFac;
 
     @Column
     private LocalDateTime dateEch;
 
     @ManyToOne
-    @JoinColumn(name = "idAbrAgc")
-    private Agence agence;
-
-    @ManyToOne
-    @JoinColumn(name = "idFour")
-    private Fournisseur fournisseur;
-
-    @ManyToOne
     @JoinColumn(name = "idPers")
     private Personne personne;
+
+    @OneToOne
+    @JoinColumn(name = "idFacComApp")
+    private CommandeAppro commandeappro;
 }

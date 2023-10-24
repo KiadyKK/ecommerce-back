@@ -19,26 +19,16 @@ public class Livraison {
     private String noBlf;
 
     @Column
-    private String mPay;
-
-    @Column
-    private Double totalLiv;
-
-    @Column
-    private LocalDateTime dateCom;
-
-    @Column
     private LocalDateTime dateEch;
 
-    @ManyToOne
-    @JoinColumn(name = "idAbrAgc")
-    private Agence agence;
-
-    @ManyToOne
-    @JoinColumn(name = "idClt")
-    private Client client;
+    @Column
+    private LocalDateTime dateFac;
 
     @ManyToOne
     @JoinColumn(name = "idPers")
     private Personne personne;
+
+    @OneToOne
+    @JoinColumn(name = "idFacComLiv")
+    private CommandeLivraison commandelivraison;
 }

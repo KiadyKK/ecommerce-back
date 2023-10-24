@@ -31,13 +31,13 @@ public class Agence {
     private String mdp;
 
     @OneToMany(mappedBy = "agence")
-    private Set<Appro> appros;
+    private Set<CommandeAppro> commandeAppros;
 
     @OneToMany(mappedBy = "agence")
-    private Set<Livraison> livraisons;
+    private Set<CommandeLivraison> commandeLivraisons;
 
     @OneToMany(mappedBy = "agence")
-    private Set<ReglementAppro> reglementAppro;
+    private Set<ReglementAppro> reglementAppros;
 
     public Agence(AgenceRequest request) {
         this.abrAgc = request.getAbrAgc();

@@ -37,6 +37,9 @@ public class Personne {
     @OneToMany(mappedBy = "personne")
     private Set<Livraison> livraisons;
 
+    @OneToMany(mappedBy = "personne")
+    private Set<CommandeAppro> commandeAppros;
+
     @ManyToOne
     @JoinColumn(name = "idRole")
     private Role role;

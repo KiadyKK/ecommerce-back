@@ -24,8 +24,8 @@ public class Fournisseur {
     private String addFour;
 
     @Column
-    String emailFour;
+    private String emailFour;
 
     @OneToMany(mappedBy = "fournisseur")
-    private Set<Appro> appros;
+    private Set<CommandeAppro> commandeAppros;
 }

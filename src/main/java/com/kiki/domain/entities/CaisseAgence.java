@@ -26,7 +26,7 @@ public class CaisseAgence {
     private Day day;
 
     @Column
-    private String recdep;
+    private String recDep;
 
     @Column
     private String noFac;

@@ -28,7 +28,7 @@ public class Client {
     private String emailClt;
 
     @OneToMany(mappedBy = "client")
-    private Set<Livraison> livraisons;
+    private Set<CommandeLivraison> commandeLivraisons;
 
     @OneToMany(mappedBy = "client")
     private Set<ReglementLivraison> reglementLivraisons;
